@@ -1,0 +1,32 @@
+// Plural Morphology FST
+digraph {
+	q0 [label=q0]
+	q_s [label=q_s]
+	q_se [label=q_se]
+	q_sei [label=q_sei]
+	q_copy_PL [label=q_copy_PL shape=doublecircle]
+	q_copy_PL_y [label=q_copy_PL_y shape=doublecircle]
+	q_copy_SG [label=q_copy_SG shape=doublecircle]
+	q_dead [label=q_dead fillcolor=lightgray shape=box style=filled]
+	q0 -> q_s [label="s / ε"]
+	q0 -> q_copy_SG [label="a–z except s / copy letter"]
+	q_s -> q_se [label="e / ε"]
+	q_s -> q_sei [label="i / ε"]
+	q_s -> q_dead [label="x,z,s,h / ε"]
+	q_s -> q_copy_PL [label="a–z except e,i,x,z,s,h / copy letter"]
+	q_se -> q_copy_PL [label="s,x,z,o / copy letter"]
+	q_se -> q_copy_PL [label="h + lookahead c or s / copy ch or sh"]
+	q_se -> q_dead [label="others / ε"]
+	q_sei -> q_copy_PL_y [label="consonant / copy letter"]
+	q_sei -> q_dead [label="vowel / ε"]
+	q_copy_PL -> q_copy_PL [label="a–z / copy letter"]
+	q_copy_PL_y -> q_copy_PL_y [label="a–z / copy letter"]
+	q_copy_SG -> q_copy_SG [label="a–z / copy letter"]
+	q_dead -> q_dead [label="any / ε"]
+	q_copy_PL [label="q_copy_PL
+(final +N+PL)" color=black shape=doublecircle]
+	q_copy_PL_y [label="q_copy_PL_y
+(final +N+PL)" color=black shape=doublecircle]
+	q_copy_SG [label="q_copy_SG
+(final +N+SG)" color=black shape=doublecircle]
+}
